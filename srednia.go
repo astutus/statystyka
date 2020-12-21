@@ -18,7 +18,7 @@ func SredniaArytmetyczna(liczby []float64) float64 {
 }
 
 // Dominanta podaje najczesciej wystepujaca liczbe z listy liczb zmiennoprzecinkowych
-func Dominanta(liczby []float64) float64 {
+func Dominanta(liczby []float64) []float64 {
 	var slownik map[float64]int
 	slownik = make(map[float64]int)
 	// zliczanie ilosci wystepowania kazdej liczby
@@ -31,7 +31,13 @@ func Dominanta(liczby []float64) float64 {
 			maximum = v
 		}
 	}
-	return maximum
+	var result []float64
+	for k, v := range slownik {
+		if k == maximum {
+			result = append(result, k)
+		}
+	}
+	return sort.Float64Slice(result)
 }
 
 // Mediana podaje wartosc srodkowa dla listy liczb zmiennoprzecinkowych
