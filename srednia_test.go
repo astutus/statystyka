@@ -17,7 +17,7 @@ var testy = []averages{
 		[]float64 {2.0, 30.2, 79.8, 30.2, 79.8, 10.0, 20.0, 2.0},
 		31.75,
 		[]float64 {2.0, 30.2, 79.8},
-		29.25,
+		25.1,
 	},
 	{
 			[]float64 {0, 0.4, 0.6, 0.8, 1.4, 0.4},
@@ -57,6 +57,7 @@ func TestMediana(t *testing.T) {
 func TestDominanta(t *testing.T) {
 	for _, average := range testy {
 		result := Dominanta(average.wejscie)
+		fmt.Println(result)
 		if ! CompareSlices(result, average.dominanta) {
 			t.Error("zle wylicza najczesciej wystepujace wartosci")
 		}
