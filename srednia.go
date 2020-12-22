@@ -32,8 +32,8 @@ func Dominanta(liczby []float64) []float64 {
 		}
 	}
 	var result []float64
-	for k, _ := range slownik {
-		if k == maximum {
+	for k, v := range slownik {
+		if v == slownik[maximum] {
 			result = append(result, k)
 		}
 	}
