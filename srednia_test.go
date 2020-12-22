@@ -31,6 +31,12 @@ var testy = []averages{
 				[]float64 {106.0},
 				93.5,
 	},
+	{
+					[]float64 {12.3},
+					12.3,
+					[]float64 {12.3},
+					12.3,
+	},
 }
 
 func TestSredniaArytmetyczna(t *testing.T) {
