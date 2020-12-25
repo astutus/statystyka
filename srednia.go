@@ -37,7 +37,8 @@ func Dominanta(liczby []float64) []float64 {
 			result = append(result, k)
 		}
 	}
-	return sort.Float64Slice(result)
+	sort.Float64s(result)
+	return result
 }
 
 // Mediana podaje wartosc srodkowa dla listy liczb zmiennoprzecinkowych
