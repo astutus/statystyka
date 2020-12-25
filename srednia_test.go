@@ -63,7 +63,6 @@ func TestMediana(t *testing.T) {
 func TestDominanta(t *testing.T) {
 	for _, average := range testy {
 		result := Dominanta(average.wejscie)
-		fmt.Println(result)
 		if ! CompareSlices(result, average.dominanta) {
 			t.Error("zle wylicza najczesciej wystepujace wartosci")
 		}
