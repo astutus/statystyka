@@ -1,7 +1,6 @@
 package statystyka
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -42,7 +41,6 @@ var testy = []averages{
 func TestSredniaArytmetyczna(t *testing.T) {
 	for _, average := range testy {
 		result := SredniaArytmetyczna(average.wejscie)
-		fmt.Println("wyliczona srednia arytmetyczna", result)
 		if result != average.sredniaArytmetyczna {
 			t.Error("zle wylicza srednia arytmetyczna")
 		}
