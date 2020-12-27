@@ -76,3 +76,18 @@ func Percentyl(procent int, wejscie []float64 ) []float64 {
 	return wejscie[0:int(pozycja)]
 
 }
+
+func Wariacja(wejscie []]float64) float64 {
+	var suma float64
+	dlugosc := len(wejscie)
+	srednia := SredniaArytmetyczna(wejscie)
+	for _, v := range wejscie {
+		suma += (v * v)
+	}
+	return suma / float64(dlugosc) - srednia * srednia
+}
+
+func OdchylenieStandardowe(wejscie []float64) float64 {
+	wariacja := Wariacja(wejscie)
+	return math.Sqrt(wariacja)
+}
