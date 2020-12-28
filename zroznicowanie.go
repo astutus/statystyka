@@ -77,6 +77,7 @@ func Percentyl(procent int, wejscie []float64 ) []float64 {
 
 }
 
+// Wariacja okresla zmiennosc danych
 func Wariacja(wejscie []]float64) float64 {
 	var suma float64
 	dlugosc := len(wejscie)
@@ -87,7 +88,13 @@ func Wariacja(wejscie []]float64) float64 {
 	return suma / float64(dlugosc) - srednia * srednia
 }
 
+// OdchylenieStandardowe pozwala nam mierzyc jak bardzo nasze dane roznia sie przecietnie od sredniej
 func OdchylenieStandardowe(wejscie []float64) float64 {
 	wariacja := Wariacja(wejscie)
 	return math.Sqrt(wariacja)
+}
+
+// Standaryzacja danych to sposob na porownanie kilku zbiorow danych rozniacych sie wartosciami sredniej i odchylenia standardowego
+func Standaryzacja(wartosc, sredniaArytmetyczna, odchylenieStandardowe float64) float64 {
+	return wartosc - sredniaArytmetyczna / odchylenieStandardowe
 }
