@@ -35,6 +35,7 @@ var dominantaCmd = &cobra.Command{
 			os.Exit(1)
 		} else if Plik != "" {
 			fmt.Println("mamy podany plik: ", Plik)
+			fmt.Println(statystyka.Dominanta(pobieranieDanych(Plik)))
 		} else if Dane != nil {
 			fmt.Println("mamy podane dane: ", Dane)
 			fmt.Println(statystyka.Dominanta(konwersja(Dane)))

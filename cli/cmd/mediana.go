@@ -35,6 +35,7 @@ var medianaCmd = &cobra.Command{
 			os.Exit(1)
 		} else if Plik != "" {
 			fmt.Println("mamy podany plik: ", Plik)
+			fmt.Println(statystyka.Mediana(pobieranieDanych(Plik)))
 		} else if Dane != nil {
 			fmt.Println("mamy podane dane: ", Dane)
 			fmt.Println(statystyka.Mediana(konwersja(Dane)))
