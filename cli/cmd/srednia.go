@@ -16,10 +16,13 @@ limitations under the License.
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
+	"os"
+	"strconv"
 )
+
+var Plik string
+var Dane []string
 
 // sredniaCmd represents the srednia command
 var sredniaCmd = &cobra.Command{
@@ -29,12 +32,16 @@ var sredniaCmd = &cobra.Command{
 - artytmetyczna
 - mediana (wartosc srodkowa)
 - dominanta (najczesciej wystepujaca)`,
+/*
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("srednia called")
 	},
+ */
 }
 
 func init() {
+	sredniaCmd.PersistentFlags().StringVar(&Plik, "plik", "", "plik z danymi")
+	sredniaCmd.PersistentFlags().StringSliceVar(&Dane, "dane", nil, "--dane 2.3,4.2,4.4")
 	rootCmd.AddCommand(sredniaCmd)
 
 	// Here you will define your flags and configuration settings.
@@ -46,4 +53,16 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// sredniaCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+}
+
+func konwersja(slice1 []string) []float64 {
+	var floatSlice []float64
+	for _, v := range slice1 {
+		liczba, err := strconv.ParseFloat(v, 64)
+		if err != nil {
+			os.Exit(2)
+		}
+		floatSlice = append(floatSlice, liczba)
+	}
+	return floatSlice
 }

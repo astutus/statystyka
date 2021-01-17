@@ -17,8 +17,9 @@ package cmd
 
 import (
 	"fmt"
-
+	"os"
 	"github.com/spf13/cobra"
+	"github.com/astutus/statystyka"
 )
 
 // dominantaCmd represents the dominanta command
@@ -28,6 +29,20 @@ var dominantaCmd = &cobra.Command{
 	Long: `dominanta wylicza najczesciej wystepujaca wartosc z podanego zbioru liczb`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("dominanta called")
+		if Plik != "" && Dane != nil {
+			fmt.Println("UWAGA: musisz podac tylko jedna z opcji --plik lub --dane\n")
+			sredniaCmd.Help()
+			os.Exit(1)
+		} else if Plik != "" {
+			fmt.Println("mamy podany plik: ", Plik)
+		} else if Dane != nil {
+			fmt.Println("mamy podane dane: ", Dane)
+			fmt.Println(statystyka.Dominanta(konwersja(Dane)))
+		} else {
+			fmt.Println("UWAGA: musisz podac jedna z opcji: --plik lub --dane\n")
+			sredniaCmd.Help()
+			os.Exit(1)
+		}
 	},
 }
 
@@ -44,3 +59,4 @@ func init() {
 	// is called directly, e.g.:
 	// dominantaCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
+

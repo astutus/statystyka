@@ -17,7 +17,8 @@ package cmd
 
 import (
 	"fmt"
-
+	"github.com/astutus/statystyka"
+	"os"
 	"github.com/spf13/cobra"
 )
 
@@ -28,6 +29,20 @@ var medianaCmd = &cobra.Command{
 	Long: `mediana wylicza srodkowa wartosc ze zbioru danych`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("mediana called")
+		if Plik != "" && Dane != nil {
+			fmt.Println("UWAGA: musisz podac tylko jedna z opcji --plik lub --dane\n")
+			sredniaCmd.Help()
+			os.Exit(1)
+		} else if Plik != "" {
+			fmt.Println("mamy podany plik: ", Plik)
+		} else if Dane != nil {
+			fmt.Println("mamy podane dane: ", Dane)
+			fmt.Println(statystyka.Mediana(konwersja(Dane)))
+		} else {
+			fmt.Println("UWAGA: musisz podac jedna z opcji: --plik lub --dane\n")
+			sredniaCmd.Help()
+			os.Exit(1)
+		}
 	},
 }
 
