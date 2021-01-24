@@ -34,7 +34,7 @@ func konwersja(slice1 []string) []float64 {
 	for _, v := range slice1 {
 		liczba, err := strconv.ParseFloat(v, 64)
 		if err != nil {
-			os.Exit(2)
+			log.Fatalln("nieprawidlowa liczba")
 		}
 		floatSlice = append(floatSlice, liczba)
 	}

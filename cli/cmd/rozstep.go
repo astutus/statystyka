@@ -17,6 +17,8 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/astutus/statystyka"
+	"os"
 
 	"github.com/spf13/cobra"
 )
@@ -28,13 +30,49 @@ var rozstepCmd = &cobra.Command{
 	Long: `rozstep to miara tego na jakiej przestrzeni rozproszone sa dane
 wyznacza sie go jako roznice miedzy najwieksza, a najmniejsza wartoscia cechy w zbiorze danych`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("rozstep called")
+		minimum, _ := cmd.Flags().GetBool("minimum")
+		maksimum, _ := cmd.Flags().GetBool("maksimum")
+		if Plik != "" && Dane != nil {
+			fmt.Println("UWAGA: musisz podac tylko jedna z opcji --plik lub --dane\n")
+			rootCmd.Help()
+			os.Exit(1)
+		} else if Plik != "" {
+			fmt.Println("mamy podany plik: ", Plik)
+			if minimum && maksimum {
+				fmt.Println(statystyka.MinimumRozstepu(pobieranieDanych(Plik)))
+				fmt.Println(statystyka.MaksimumRoztsepu(pobieranieDanych(Plik)))
+			} else if minimum {
+				fmt.Println(statystyka.MinimumRozstepu(pobieranieDanych(Plik)))
+			} else if maksimum {
+				fmt.Println(statystyka.MaksimumRoztsepu(pobieranieDanych(Plik)))
+			} else {
+				fmt.Println(statystyka.Rozstep(pobieranieDanych(Plik)))
+			}
+		} else if Dane != nil {
+			fmt.Println("mamy podane dane: ", Dane)
+			if minimum && maksimum {
+				fmt.Println(statystyka.MinimumRozstepu(konwersja(Dane)))
+				fmt.Println(statystyka.MaksimumRoztsepu(konwersja(Dane)))
+			} else if minimum {
+				fmt.Println(statystyka.MinimumRozstepu(konwersja(Dane)))
+			} else if maksimum {
+				fmt.Println(statystyka.MaksimumRoztsepu(konwersja(Dane)))
+			} else {
+				fmt.Println(statystyka.Rozstep(konwersja(Dane)))
+			}
+		} else {
+			fmt.Println("UWAGA: musisz podac jedna z opcji: --plik lub --dane\n")
+			rootCmd.Help()
+			os.Exit(1)
+		}
 	},
 }
 
 func init() {
 	rozstepCmd.PersistentFlags().StringVar(&Plik, "plik", "", "plik z danymi")
 	rozstepCmd.PersistentFlags().StringSliceVar(&Dane, "dane", nil, "--dane 2.3,4.2,4.4")
+	rozstepCmd.Flags().Bool("minimum", false, "najmniejsza wartość cechy w zbiorze danych")
+	rozstepCmd.Flags().Bool("maksimum", false, "największa wartość cechy w zbiorze danych")
 	rootCmd.AddCommand(rozstepCmd)
 
 	// Here you will define your flags and configuration settings.
