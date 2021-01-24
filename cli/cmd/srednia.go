@@ -24,9 +24,6 @@ import (
 	"strings"
 )
 
-var Plik string
-var Dane []string
-
 // sredniaCmd represents the srednia command
 var sredniaCmd = &cobra.Command{
 	Use:   "srednia",

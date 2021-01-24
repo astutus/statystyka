@@ -25,6 +25,9 @@ import (
 )
 
 var cfgFile string
+var Plik string
+var Dane []string
+
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
